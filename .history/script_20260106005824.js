@@ -49,4 +49,5 @@ fetch(API_URL)
     document.getElementById(
       "status"
     ).innerHTML = `<div class="text-red-500 font-semibold">❌ Lỗi: ${error.message}</div>`;
+<<<<<<< HEAD
   });

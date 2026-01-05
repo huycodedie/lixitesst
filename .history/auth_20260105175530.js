@@ -101,7 +101,7 @@ const AuthManager = {
               `${this.API_URL}/user/get-details-user/${userId}`,
               {
                 headers: {
-                  token: `Bearer ${tokenValue}`,
+                  Authorization: `Bearer ${tokenValue}`,
                   "Content-Type": "application/json",
                 },
               }
@@ -152,28 +152,6 @@ const AuthManager = {
   getToken() {
     return localStorage.getItem("token");
   },
-
-  // Decode JWT payload (base64url)
-  decodeJwtPayload(token) {
-    try {
-      if (!token) return null;
-      const parts = token.split(".");
-      if (parts.length < 2) return null;
-      const payload = parts[1];
-      const b64 = payload.replace(/-/g, "+").replace(/_/g, "/");
-      const json = decodeURIComponent(
-        atob(b64)
-          .split("")
-          .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-      return JSON.parse(json);
-    } catch (e) {
-      return null;
-    }
-  },
 };
 
 // Hàm cập nhật UI dựa trên trạng thái đăng nhập
@@ -186,67 +164,23 @@ function updateAuthUI() {
   const loginButtons = document.querySelector(".auth-buttons");
   const userMenu = document.querySelector(".user-menu");
 
-  // Toggle visibility using both style and Tailwind's `hidden` class
   if (loginButtons) {
-    if (logged) {
-      loginButtons.style.display = "none";
-      loginButtons.classList.add("hidden");
-    } else {
-      loginButtons.style.display = "flex";
-      loginButtons.classList.remove("hidden");
-    }
+    loginButtons.style.display = logged ? "none" : "flex";
   }
 
   if (userMenu) {
-    if (logged) {
-      userMenu.style.display = "flex";
-      userMenu.classList.remove("hidden");
-    } else {
-      userMenu.style.display = "none";
-      userMenu.classList.add("hidden");
-    }
+    userMenu.style.display = logged ? "flex" : "none";
 
-    // Populate user info: prefer stored user, fallback to token payload
-    let displayName = null;
-    let avatarUrl = null;
+    if ((isLoggedIn || tokenPresent) && user) {
+      const userName = userMenu.querySelector(".user-name");
+      const userAvatar = userMenu.querySelector(".user-avatar");
 
-    if (user) {
-      displayName =
-        user.name || user.fullname || user.full_name || user.email || null;
-      avatarUrl = user.avatar || user.avatarUrl || null;
-    }
-
-    if (!displayName && tokenPresent) {
-      try {
-        const payload = AuthManager.decodeJwtPayload(AuthManager.getToken());
-        if (payload) {
-          displayName =
-            payload.name ||
-            payload.fullname ||
-            payload.full_name ||
-            payload.username ||
-            payload.email ||
-            null;
-          avatarUrl = avatarUrl || payload.avatar || payload.picture || null;
-        }
-      } catch (e) {
-        // ignore
+      if (userName) {
+        userName.textContent = user.name || user.email || "Người dùng";
       }
-    }
 
-    const userName = userMenu.querySelector(".user-name");
-    const userAvatar = userMenu.querySelector(".user-avatar");
-
-    if (userName) {
-      userName.textContent = displayName || "Người dùng";
-    }
-
-    if (userAvatar) {
-      if (avatarUrl) {
-        userAvatar.src = avatarUrl;
-      } else {
-        userAvatar.src = userAvatar.src || "https://via.placeholder.com/40";
-
+      if (userAvatar && user.avatar) {
+        userAvatar.src = user.avatar;
       }
     }
   }

@@ -152,6 +152,7 @@ const AuthManager = {
   getToken() {
     return localStorage.getItem("token");
   },
+<<<<<<< HEAD
 
   // Decode JWT payload (base64url)
   decodeJwtPayload(token) {
@@ -174,6 +175,8 @@ const AuthManager = {
       return null;
     }
   },
+=======
+>>>>>>> d053237bf2f7d7ab4578bd80ba450cfdaaea3fde
 };
 
 // Hàm cập nhật UI dựa trên trạng thái đăng nhập

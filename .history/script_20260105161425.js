@@ -22,22 +22,13 @@ fetch(API_URL)
 
     envelopes.forEach((item, index) => {
       const tr = document.createElement("tr");
-      tr.className = "border-b border-yellow-200 hover:bg-yellow-50";
 
       tr.innerHTML = `
-        <td class="px-4 py-2 text-center border border-yellow-200">${
-          index + 1
-        }</td>
-        <td class="px-4 py-2 text-center border border-yellow-200">${
-          item._id || ""
-        }</td>
-        <td class="px-4 py-2 text-center border border-yellow-200">${
-          item.name || item.title || "Không có tên"
-        }</td>
-        <td class="px-4 py-2 text-center border border-yellow-200 text-red-600 font-semibold">${
-          item.amount ? item.amount.toLocaleString() : 0
-        } ₫</td>
-        <td class="px-4 py-2 text-center border border-yellow-200">${
+        <td>${index + 1}</td>
+        <td>${item._id || ""}</td>
+        <td>${item.name || item.title || "Không có tên"}</td>
+        <td>${item.amount ? item.amount.toLocaleString() : 0} ₫</td>
+        <td>${
           item.createdAt ? new Date(item.createdAt).toLocaleString() : ""
         }</td>
       `;
@@ -48,5 +39,5 @@ fetch(API_URL)
   .catch((error) => {
     document.getElementById(
       "status"
-    ).innerHTML = `<div class="text-red-500 font-semibold">❌ Lỗi: ${error.message}</div>`;
+    ).innerHTML = `<div class="error">❌ Lỗi: ${error.message}</div>`;
   });

@@ -152,6 +152,29 @@ const AuthManager = {
   getToken() {
     return localStorage.getItem("token");
   },
+<<<<<<< HEAD
+
+  // Decode JWT payload (base64url)
+  decodeJwtPayload(token) {
+    try {
+      if (!token) return null;
+      const parts = token.split(".");
+      if (parts.length < 2) return null;
+      const payload = parts[1];
+      const b64 = payload.replace(/-/g, "+").replace(/_/g, "/");
+      const json = decodeURIComponent(
+        atob(b64)
+          .split("")
+          .map(function (c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("")
+      );
+      return JSON.parse(json);
+    } catch (e) {
+      return null;
+    }
+  },
 
   // Decode JWT payload (base64url)
   decodeJwtPayload(token) {
@@ -186,6 +209,7 @@ function updateAuthUI() {
   const loginButtons = document.querySelector(".auth-buttons");
   const userMenu = document.querySelector(".user-menu");
 
+<<<<<<< HEAD
   // Toggle visibility using both style and Tailwind's `hidden` class
   if (loginButtons) {
     if (logged) {
@@ -246,7 +270,25 @@ function updateAuthUI() {
         userAvatar.src = avatarUrl;
       } else {
         userAvatar.src = userAvatar.src || "https://via.placeholder.com/40";
+=======
+  if (loginButtons) {
+    loginButtons.style.display = logged ? "none" : "flex";
+  }
 
+  if (userMenu) {
+    userMenu.style.display = logged ? "flex" : "none";
+
+    if ((isLoggedIn || tokenPresent) && user) {
+      const userName = userMenu.querySelector(".user-name");
+      const userAvatar = userMenu.querySelector(".user-avatar");
+
+      if (userName) {
+        userName.textContent = user.name || user.email || "Người dùng";
+      }
+
+      if (userAvatar && user.avatar) {
+        userAvatar.src = user.avatar;
+>>>>>>> d053237bf2f7d7ab4578bd80ba450cfdaaea3fde
       }
     }
   }

@@ -152,6 +152,7 @@ const AuthManager = {
   getToken() {
     return localStorage.getItem("token");
   },
+<<<<<<< HEAD
 
   // Decode JWT payload (base64url)
   decodeJwtPayload(token) {
