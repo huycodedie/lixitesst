@@ -130,11 +130,11 @@
 
               <!-- Dropdown Menu -->
               <div id="userDropdown" class="dropdown-menu w-48 mt-2">
-                <a href="index.html" class="block px-4 py-2 text-gray-800 hover:bg-red-50">🏠 Trang chủ</a>
-                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-red-50">➕ Tạo phong bao</a>
-                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-red-50">📬 Phong bao đã nhận</a>
+                <a href="#home" onclick="Router.navigate('home')" class="block px-4 py-2 text-gray-800 hover:bg-red-50">🏠 Trang chủ</a>
+                <a href="#create" onclick="Router.navigate('create')" class="block px-4 py-2 text-gray-800 hover:bg-red-50">➕ Tạo phong bì</a>
+                <a href="#list" onclick="Router.navigate('list')" class="block px-4 py-2 text-gray-800 hover:bg-red-50">📋 Phong bì của tôi</a>
                 <hr class="my-2" />
-                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-red-50">⚙️ Cài đặt</a>
+                <a href="#settings" onclick="Router.navigate('settings')" class="block px-4 py-2 text-gray-800 hover:bg-red-50">⚙️ Cài đặt</a>
                 <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 font-bold">🚪 Đăng xuất</button>
               </div>
             </div>
@@ -154,104 +154,24 @@
       >
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-center">
-            <div class="w-full max-w-2xl">
-              <div
-                class="relative flex flex-col gap-6 rounded-xl border-2 border-yellow-400 bg-red-600 p-6 sm:p-8 shadow-2xl overflow-hidden"
-              >
-                <div class="absolute inset-0 opacity-10 pointer-events-none">
-                  <img
-                    alt="fireworks"
-                    class="absolute -top-10 -left-10 w-40 h-40"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8JxbV5Lh3UjfpsUZOjms1SI4EU01XSKOf-ssATQQpcDw8clflsPk-2Us_v1M0LdJoLvwB2tfl39hHhA2sKgqNZVbC2doBxqOyCC3hLo7cpMZCB9_fMycSZ_H0LBvQk6fNH3c-b-2YgLke-odmHw5l4EPIgmtbPwvBOsYAWz4DqHWUY38ng3gFLxkS5s0oGoNCr8Nt00AkK6hyb-_UkVWu7X1hWPILlozzmWQVm37RU7MhfMu6t0UlS7Wz9IZYDGdp_lF8TzbPv0Q"
-                  />
-                  <img
-                    alt="fireworks"
-                    class="absolute -bottom-12 -right-12 w-48 h-48"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlK8dh_Mg28FlU0J_ZjAXM0trek1QYb3dpwMGcB4Pe4a_hagJPz3ZbvQs4m7spGZtbmMVDqvELfrZKoKP3hw3DEcr7i1eNgNVagIOyLySHC-MkSXoSm8D4MqVETkoXCGCHQikwKBegUvyso-BtR67LoDNJk_xZZHirRQObNAui3zaRiXYUxZ0Xrf0zMTUzVYAxLMgCs2F2LnYKkIiR6J0X2YxWdxRx3VuGewhE6MiA-dbKk0GyaQi18HN6KxJewg6ucDnYWfCG2wc"
-                  />
-                </div>
-                <div class="absolute -top-2 -left-2 w-16 h-16">
-                  <img
-                    alt="mai flower corner"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7KAHFcUhv7ghGtsHMTqbE5q10dc--H8aG3FlJfpjRWP9gahdY8voqJjdcG0urmLCILvizrBieo90taSH6C-D7gvT40LlayguGgQM2otfxrvqQ8u1yT-H6x5BJdhWxnz_ycRZcOPCJVovBH_deppCnAanuycZqy1ptAuOhvE73KdA79UzRionPFtljNm4igQDvlTsuvgF6fFFfso0eEx9_HFco3C1R9NvnUlKSp0jbSFO2dIJfkidNAYNxvDF3R1_fpBXSYDLAIoo"
-                  />
-                </div>
-                <div
-                  class="absolute -bottom-2 -right-2 w-16 h-16 transform scale-x-[-1]"
-                >
-                  <img
-                    alt="mai flower corner"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtG4sjgAxPpCvMtDC7HEOZ2K75Rqh7PW718ZI9Y-jc6OerPn380hANJtrEkw4vMHAcYWAiRZXWF8eVzngwdvZxI9usdL849M1ge4JC72kmn4A3lQQAE5RijJNlS36UoUBcibeUnirQHJwlQrWBZHACa_GoRfRebQiDbRy5Ox9ZRgduK8elH_PqSInqB9hFRZPLBWExU6KXNHeocTFCrbTqWBHYgIQy28GGrkCctcZGDXmVOTZX4hWXfFVCfP9x3EUFrnwOx9fVyxY"
-                  />
-                </div>
-                <div class="flex flex-col gap-3 text-center z-10">
-                  <h1
-                    class="text-yellow-300 text-3xl sm:text-4xl font-black leading-tight tracking-[-0.033em] drop-shadow-md"
-                  >
-                    📩 Danh sách Envelope
-                  </h1>
-
-                  <div
-                    id="status"
-                    class="text-yellow-100 text-base sm:text-lg font-normal leading-normal"
-                  >
-                    Đang tải dữ liệu...
-                  </div>
-
-                  <table
-                    id="envelopeTable"
-                    style="display: none"
-                    class="w-full border-collapse bg-white mt-5 rounded-lg overflow-hidden"
-                  >
-                    <thead>
-                      <tr class="bg-yellow-400">
-                        <th
-                          class="px-4 py-2 text-red-800 font-bold text-center border border-yellow-300"
-                        >
-                          #
-                        </th>
-                        <th
-                          class="px-4 py-2 text-red-800 font-bold text-center border border-yellow-300"
-                        >
-                          ID
-                        </th>
-                        <th
-                          class="px-4 py-2 text-red-800 font-bold text-center border border-yellow-300"
-                        >
-                          Tên
-                        </th>
-                        <th
-                          class="px-4 py-2 text-red-800 font-bold text-center border border-yellow-300"
-                        >
-                          Số tiền
-                        </th>
-                        <th
-                          class="px-4 py-2 text-red-800 font-bold text-center border border-yellow-300"
-                        >
-                          Ngày tạo
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody id="tableBody" class="bg-white"></tbody>
-                  </table>
-                </div>
-                <div class="flex justify-center pt-2 z-10">
-                  <button
-                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-yellow-400 hover:bg-yellow-300 transition-colors text-red-800 text-base font-bold leading-normal tracking-[0.015em] shadow-lg"
-                  >
-                    <span class="truncate">Tìm hiểu thêm</span>
-                  </button>
-                </div>
-              </div>
+            <div class="w-full max-w-2xl" id="app">
+              <!-- App Views -->
             </div>
           </div>
         </div>
       </main>
       <script src="auth.js"></script>
       <script src="script.js"></script>
+      <script src="router.js"></script>
       <script>
         // Cập nhật UI khi trang tải
-        document.addEventListener("DOMContentLoaded", updateAuthUI);
+        document.addEventListener("DOMContentLoaded", function() {
+          updateAuthUI();
+          // Khởi tạo router
+          Router.init();
+          // Lắng nghe thay đổi route
+          window.addEventListener("popstate", () => Router.render());
+        });
 
         // Toggle dropdown menu
         function toggleDropdown() {
@@ -272,6 +192,7 @@
         function handleLogout() {
           if (confirm("Bạn chắc chắn muốn đăng xuất?")) {
             AuthManager.logout();
+            window.location.href = "/";
           }
         }
       </script>
