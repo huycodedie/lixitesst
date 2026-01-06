@@ -289,7 +289,60 @@
       </main>
       <script src="../auth.js"></script>
       <script src="../script.js"></script>
-      <script src="./register.js"></script>
+      <script>
+        document.getElementById('registerBtn').addEventListener('click', async function () {
+          const fullname = document.getElementById('fullname').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const password = document.getElementById('password').value;
+          const conf = document.getElementById('confirmpassword').value;
+          const terms = document.getElementById('terms').checked;
+
+          if (!email || !password) {
+            alert('Vui lòng nhập email và mật khẩu.');
+            return;
+          }
+
+          if (password.length < 8) {
+            alert('Mật khẩu phải có ít nhất 8 ký tự.');
+            return;
+          }
+
+          if (password !== conf) {
+            alert('Mật khẩu và xác nhận mật khẩu không khớp.');
+            return;
+          }
+
+          if (!terms) {
+            alert('Vui lòng đồng ý với điều khoản sử dụng.');
+            return;
+          }
+
+          const btn = document.getElementById('registerBtn');
+          const original = btn.innerHTML;
+          btn.innerHTML = '<span class="truncate">Đang xử lý...</span>';
+          btn.disabled = true;
+
+          try {
+            const res = await AuthManager.register({ email, password, fullname });
+            // If API returns a message that account exists, show it
+            if (res && (res.success === false || res.message)) {
+              const msg = res.message || 'Đăng ký không thành công';
+              alert(msg);
+              btn.innerHTML = original;
+              btn.disabled = false;
+              return;
+            }
+
+            alert('Đăng ký thành công. Vui lòng đăng nhập.');
+            // Redirect to login (same folder)
+            window.location.href = './login.html';
+          } catch (err) {
+            alert('Lỗi: ' + (err.message || 'Không thể đăng ký'));
+            btn.innerHTML = original;
+            btn.disabled = false;
+          }
+        });
+      </script>
     </div>
   </body>
 </html>

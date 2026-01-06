@@ -149,8 +149,8 @@ const AuthManager = {
   },
 
   // Đăng ký
-  async register(email) {
-    console.log("Registering with email:", email.email);
+  async register(email, password) {
+    con
     try {
       const response = await fetch(`${this.API_URL}/user/sign-up`, {
         method: "POST",
@@ -158,8 +158,8 @@ const AuthManager = {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: email.email,
-          password: email.password,
+          email,
+          password,
         }),
       });
       

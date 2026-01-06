@@ -141,40 +141,37 @@ const AuthManager = {
     }
   },
 
+  // Đăng ký
+  async register({ email, password, fullname }) {
+    try {
+      const response = await fetch(`${this.API_URL}/user/sign-up`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, password: password, fullname: fullname }),
+      });
+
+      const data = await response.json();
+
+      // If backend returns unsuccessful payload
+      if (
+        !response.ok ||
+        (data && (data.success === false || data.error || (data.message && typeof data.message === "string" && /error|failed|invalid|exists|tồn tại|already|taken/i.test(data.message))))
+      ) {
+        const msg = (data && (data.message || data.error)) || "Đăng ký thất bại";
+        throw new Error(msg);
+      }
+
+      return data;
+    } catch (err) {
+      throw err;
+    }
+  },
+
   // Đăng xuất
   logout() {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     window.location.href = "index.html";
-  },
-
-  // Đăng ký
-  async register(email) {
-    console.log("Registering with email:", email.email);
-    try {
-      const response = await fetch(`${this.API_URL}/user/sign-up`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email.email,
-          password: email.password,
-        }),
-      });
-      
-      const data = await response.json();
-
-      // Nếu API trả về lỗi
-      if (!response.ok || data.success === false) {
-        const msg = data.message || data.error || "Đăng ký thất bại";
-        throw new Error(msg);
-      }
-
-      return data;
-    } catch (error) {
-      throw error;
-    }
   },
 
   // Lấy token
@@ -275,11 +272,7 @@ function updateAuthUI() {
         userAvatar.src = avatarUrl;
       } else {
         userAvatar.src = userAvatar.src || "https://via.placeholder.com/40";
-        userName.textContent = user.name || user.email || "Người dùng";
-      }
 
-      if (userAvatar && user.avatar) {
-        userAvatar.src = user.avatar;
       }
     }
   }

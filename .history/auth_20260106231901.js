@@ -159,7 +159,7 @@ const AuthManager = {
         },
         body: JSON.stringify({
           email: email.email,
-          password: email.password,
+          password.password,
         }),
       });
       

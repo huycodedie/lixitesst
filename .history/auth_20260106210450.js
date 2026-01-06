@@ -148,35 +148,6 @@ const AuthManager = {
     window.location.href = "index.html";
   },
 
-  // Đăng ký
-  async register(email) {
-    console.log("Registering with email:", email.email);
-    try {
-      const response = await fetch(`${this.API_URL}/user/sign-up`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email.email,
-          password: email.password,
-        }),
-      });
-      
-      const data = await response.json();
-
-      // Nếu API trả về lỗi
-      if (!response.ok || data.success === false) {
-        const msg = data.message || data.error || "Đăng ký thất bại";
-        throw new Error(msg);
-      }
-
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-
   // Lấy token
   getToken() {
     return localStorage.getItem("token");

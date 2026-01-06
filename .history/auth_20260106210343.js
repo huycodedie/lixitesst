@@ -101,7 +101,11 @@ const AuthManager = {
               `${this.API_URL}/user/get-details-user/${userId}`,
               {
                 headers: {
+<<<<<<< HEAD
                   token: `Bearer ${tokenValue}`,
+=======
+                  Authorization: `Bearer ${tokenValue}`,
+>>>>>>> d053237bf2f7d7ab4578bd80ba450cfdaaea3fde
                   "Content-Type": "application/json",
                 },
               }
@@ -148,39 +152,11 @@ const AuthManager = {
     window.location.href = "index.html";
   },
 
-  // Đăng ký
-  async register(email) {
-    console.log("Registering with email:", email.email);
-    try {
-      const response = await fetch(`${this.API_URL}/user/sign-up`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email.email,
-          password: email.password,
-        }),
-      });
-      
-      const data = await response.json();
-
-      // Nếu API trả về lỗi
-      if (!response.ok || data.success === false) {
-        const msg = data.message || data.error || "Đăng ký thất bại";
-        throw new Error(msg);
-      }
-
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-
   // Lấy token
   getToken() {
     return localStorage.getItem("token");
   },
+<<<<<<< HEAD
 
   // Decode JWT payload (base64url)
   decodeJwtPayload(token) {
@@ -203,6 +179,8 @@ const AuthManager = {
       return null;
     }
   },
+=======
+>>>>>>> d053237bf2f7d7ab4578bd80ba450cfdaaea3fde
 };
 
 // Hàm cập nhật UI dựa trên trạng thái đăng nhập
@@ -215,6 +193,7 @@ function updateAuthUI() {
   const loginButtons = document.querySelector(".auth-buttons");
   const userMenu = document.querySelector(".user-menu");
 
+<<<<<<< HEAD
   // Toggle visibility using both style and Tailwind's `hidden` class
   if (loginButtons) {
     if (logged) {
@@ -275,11 +254,25 @@ function updateAuthUI() {
         userAvatar.src = avatarUrl;
       } else {
         userAvatar.src = userAvatar.src || "https://via.placeholder.com/40";
+=======
+  if (loginButtons) {
+    loginButtons.style.display = logged ? "none" : "flex";
+  }
+
+  if (userMenu) {
+    userMenu.style.display = logged ? "flex" : "none";
+
+    if ((isLoggedIn || tokenPresent) && user) {
+      const userName = userMenu.querySelector(".user-name");
+      const userAvatar = userMenu.querySelector(".user-avatar");
+
+      if (userName) {
         userName.textContent = user.name || user.email || "Người dùng";
       }
 
       if (userAvatar && user.avatar) {
         userAvatar.src = user.avatar;
+>>>>>>> d053237bf2f7d7ab4578bd80ba450cfdaaea3fde
       }
     }
   }
